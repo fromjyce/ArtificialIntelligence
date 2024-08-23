@@ -1,0 +1,45 @@
+.algorithm-detail {
+    display: flex;
+    align-items: center;
+    width: 80%;
+    max-width: 800px;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.detail-text {
+    flex: 1;
+    margin-right: 20px;
+}
+
+.detail-button-container {
+    flex-shrink: 0;
+}
+
+.algorithm-detail h2 {
+    font-size: 24px;
+    margin-bottom: 10px;
+}
+
+.algorithm-detail p {
+    font-size: 16px;
+    margin-bottom: 20px;
+    text-align: left;
+}
+
+.detail-button {
+    width: 150px;
+    height: 40px;
+    font-size: 16px;
+    background-color: #46B751;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.detail-button:hover {
+    background-color: #4D8C69;
+}
