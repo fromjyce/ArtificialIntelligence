@@ -10,7 +10,7 @@ const AlgorithmDetail = ({ title, description, link }) => (
         </div>
         <div className="detail-button-container">
             <Link to={link}>
-                <button className="detail-button">Learn More</button>
+                <button className="detail-button">Check Out!</button>
             </Link>
         </div>
     </div>
