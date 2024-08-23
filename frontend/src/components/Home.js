@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import './Home.css';
 
 const SplashScreen = ({ onAnimationEnd, className }) => {
@@ -10,18 +11,32 @@ const SplashScreen = ({ onAnimationEnd, className }) => {
 };
 
 const MainScreen = () => {
+    const navigate = useNavigate();
+
+    const blindButtonClick = () => {
+        navigate('/blind-algorithm-list');
+    };
+
+    const informedButtonClick = () => {
+        navigate('/informed-algorithm-list');
+    };
+
+    const optimalButtonClick = () => {
+        navigate('/optimal-algorithm-list');
+    };
+
     return (
         <div className="main-screen">
         <div className="button-container">
-            <button className="main-button">Blind / Uninformed Algorithms</button>
+            <button className="main-button" onClick={blindButtonClick}>Blind / Uninformed Algorithms</button>
             <p className="button-text">These algorithms explore a search space without having any information about the problem other than the definition of the state space and the actions that can be performed from a given state.</p>
         </div>
         <div className="button-container">
-            <button className="main-button">Informed Algorithms</button>
+            <button className="main-button" onClick={informedButtonClick}>Informed Algorithms</button>
             <p className="button-text">Also known as heuristic search algorithms, these methods use problem-specific knowledge to guide the search process towards the goal. A heuristic function provides an estimate of how close a state is to the goal.</p>
         </div>
         <div className="button-container">
-            <button className="main-button">Optimal Algorithms</button>
+            <button className="main-button" onClick={optimalButtonClick}>Optimal Algorithms</button>
             <p className="button-text">An optimal search algorithm guarantees to find the shortest path or least-cost solution in terms of the given problem constraints.</p>
         </div>
     </div>
