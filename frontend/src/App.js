@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import BlindAlgoList from './components/BlindAlgoList';
 import InformedAlgoList from './components/InformedAlgoList';
 import OptimalAlgoList from './components/OptimalAlgoList';
-import BritishMuseumSearch from "./components/BritishMuseumSearch";
+import BritishMuseumSearch from "./components/algo-pages/BritishMuseumSearch";
 
 function App() {
   return (
