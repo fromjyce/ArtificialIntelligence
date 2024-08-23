@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import BlindAlgoList from './components/BlindAlgoList';
 import InformedAlgoList from './components/InformedAlgoList';
 import OptimalAlgoList from './components/OptimalAlgoList';
+import BritishMuseumSearch from "./components/BritishMuseumSearch";
 
 function App() {
   return (
@@ -12,6 +13,7 @@ function App() {
                 <Route path="/blind-algorithm-list" element={<BlindAlgoList />} />
                 <Route path="/informed-algorithm-list" element={<InformedAlgoList/>} />
                 <Route path="/optimal-algorithm-list" element={<OptimalAlgoList/>} />
+                <Route path="/british-museum-search" element={<BritishMuseumSearch/>} />
             </Routes>
         </Router>
   );
