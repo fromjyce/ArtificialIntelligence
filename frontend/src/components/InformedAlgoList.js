@@ -26,7 +26,7 @@ const InformedAlgoList = () => {
                     <AlgorithmDetail 
                         title="Best First Search" 
                         description="Best First Search explores a search space by prioritizing nodes that appear to be the most promising" 
-                        link="best-first-search" 
+                        link="/best-first-search" 
                     />
                     </div>
             <button className="back-button" onClick={() => navigate('/')}>Back</button>
