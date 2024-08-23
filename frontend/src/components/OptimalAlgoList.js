@@ -1,37 +1,41 @@
 
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import AlgorithmDetail from './AlgorithmDetail';
 import '../styles/OptimalAlgoList.css';
 
 const OptimalAlgoList = () => {
+    const navigate = useNavigate();
     return (
-        <div className="blind-algorithm-list">
-           <div className="algorithm-details">
+        <div className="algorithm-details">
             <div className="details-container">
-                <AlgorithmDetail 
-                    title="British Museum Search" 
-                    description="Description of British Museum Search algorithm goes here." 
-                />
-                <AlgorithmDetail 
-                    title="Another Algorithm" 
-                    description="Description of another algorithm goes here." 
-                />
-                <AlgorithmDetail 
-                    title="Yet Another Algorithm" 
-                    description="Description of yet another algorithm goes here." 
-                />
-                <AlgorithmDetail 
-                    title="Yet Another Algorithm" 
-                    description="Description of yet another algorithm goes here." 
-                />
-                <AlgorithmDetail 
-                    title="Yet Another Algorithm" 
-                    description="Description of yet another algorithm goes here." 
-                />
-            </div>
-            <Link to="/" className="back-button">Back to Home</Link>
-        </div>
+                    <AlgorithmDetail 
+                        title="Branch & Bound" 
+                        description="It systematically explores the search space while maintaining a list of partial solutions and using bounds to discard suboptimal paths." 
+                        link="/branch-bound-method" 
+                    />
+                    <AlgorithmDetail 
+                        title="Branch & Bound + Extended List ( Dead Horse )" 
+                        description="This method is an extension of Branch & Bound that involves maintaining an extended list of paths (often to avoid redundant paths)." 
+                        link="/branch-bound-dead-horse-method" 
+                    />
+                    <AlgorithmDetail 
+                        title="Branch & Bound + Cost + Heuristics" 
+                        description="This method combines Branch & Bound with heuristic estimates of remaining distance." 
+                        link="/branch-bound-cost-heuristics-method" 
+                    />
+                    <AlgorithmDetail 
+                        title="Branch & Bound + Dead Horse + Cost + Heuristics" 
+                        description="his is a more advanced variant of Branch & Bound that includes cost estimates, heuristics, and methods to handle redundant paths." 
+                        link="/branch-bound-dead-horse-cost-heauristics-method" 
+                    />
+                    <AlgorithmDetail 
+                        title="A* Search" 
+                        description="It is an algorithm that finds the shortest path between two nodes in a graph by combining the actual cost from the start node and an estimated cost to the goal." 
+                        link="a-star-search-method" 
+                    />
+                    </div>
+            <button className="back-button" onClick={() => navigate('/')}>Back</button>
         </div>
     );
 };
