@@ -2,6 +2,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import AlgorithmDetail from './AlgorithmDetail';
+import '../styles/InformedAlgoList.css';
 
 const InformedAlgoList = () => {
     return (

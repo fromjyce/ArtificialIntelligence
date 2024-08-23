@@ -1,5 +1,5 @@
 import React from 'react';
-import './AlgorithmDetail.css';
+import '../styles/AlgorithmDetail.css';
 
 const AlgorithmDetail = ({ title, description }) => (
     <div className="algorithm-detail">
