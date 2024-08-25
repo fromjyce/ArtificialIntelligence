@@ -16,7 +16,13 @@ def process_graph():
 
     num_vertices = data.get('vertices', '')
     num_edges = data.get('edges', '')
+    initial_vertex = data.get('initial_vertex', '')
+    terminal_vertex = data.get('terminal_vertex', '')
     graph = {}
+
+    print(f"Received Algorithm Name: {data.get('algorithm_name', 'Unknown Algorithm')}")
+    print(f"Received Initial Vertex: {initial_vertex}")
+    print(f"Received Terminal Vertex: {terminal_vertex}")
 
     if num_vertices and num_edges:
         num_vertices = int(num_vertices)
@@ -33,7 +39,13 @@ def process_graph():
                 graph[end_vertex] = []
             graph[start_vertex].append((end_vertex, edge_weight))
             graph[end_vertex].append((start_vertex, edge_weight))
-        return jsonify({'graph': graph})
+
+        print(f"Processed Graph: {graph}")
+        return jsonify({
+            'graph': graph,
+            'initial_vertex': initial_vertex,
+            'terminal_vertex': terminal_vertex
+        })
     return jsonify({'error': 'Invalid input'})
 
 if __name__ == '__main__':
