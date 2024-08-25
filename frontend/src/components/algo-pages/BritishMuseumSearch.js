@@ -9,7 +9,7 @@ const BritishMuseumSearch = () => {
     const [terminalVertex, setTerminalVertex] = useState('');
     const [imageSrc, setImageSrc] = useState('');
     const [errorMessage, setErrorMessage] = useState('');
-    const [algorithmName] = useState('British Museum Search'); // Algorithm name state
+    const [algorithmName] = useState('British Museum Search');
 
     const handleEdgesChange = (e) => {
         const edges = e.target.value;
@@ -40,7 +40,7 @@ const BritishMuseumSearch = () => {
         }
 
         const formDataObj = {
-            algorithm_name: algorithmName, // Include algorithm name in the payload
+            algorithm_name: algorithmName,
             vertices: numVertices,
             edges: numEdges,
             initial_vertex: initialVertex,
@@ -83,7 +83,7 @@ const BritishMuseumSearch = () => {
     return (
         <div className="british-museum-search-container">
             <div className="left-side-container">
-                <h1>Algorithm Name</h1>
+                <h1 className='algorithm-title'>British Museum Search</h1>
                 <form onSubmit={handleSubmit} className="form-container">
                     <div>
                         <input
