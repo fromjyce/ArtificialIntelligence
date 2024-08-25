@@ -1,6 +1,6 @@
 .british-museum-search-container {
     display: flex;
-    flex-direction: row; /* Change to row to align left and right sides */
+    flex-direction: row;
     height: 100vh;
     padding: 20px;
     background-color: #0C090A;
@@ -10,9 +10,9 @@
 .left-side-container {
     display: flex;
     flex-direction: column;
-    justify-content: center; /* Centers content vertically within the left side */
-    align-items: center; /* Centers content horizontally within the left side */
-    flex: 1; /* Takes up half of the container */
+    justify-content: center;
+    align-items: center;
+    flex: 1;
 }
 
 .form-container {
@@ -20,18 +20,18 @@
     flex-direction: column;
     gap: 20px;
     max-width: 40%;
-    max-height: 70vh; /* Adjust this value to control form height */
+    max-height: 70vh;
     margin-bottom: 20px;
-    overflow-y: auto; /* Enable vertical scrolling */
-    padding-right: 10px; /* Add padding to avoid content hiding behind the scroll bar */
+    overflow-y: auto;
+    padding-right: 10px;
 }
 
 
 .right-side-container {
     display: flex;
-    justify-content: center; /* Centers the image horizontally within the right side */
-    align-items: center; /* Centers the image vertically within the right side */
-    flex: 1; /* Takes up half of the container */
+    justify-content: center;
+    align-items: center;
+    flex: 1;
 }
 
 .image-container {
