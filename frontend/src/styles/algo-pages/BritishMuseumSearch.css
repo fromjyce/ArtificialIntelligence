@@ -1,0 +1,65 @@
+.british-museum-search-container {
+    display: flex;
+    flex-direction: row; /* Change to row to align left and right sides */
+    height: 100vh;
+    padding: 20px;
+    background-color: #0C090A;
+    color: #E4DB49;
+}
+
+.left-side-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center; /* Centers content vertically within the left side */
+    align-items: center; /* Centers content horizontally within the left side */
+    flex: 1; /* Takes up half of the container */
+}
+
+.form-container {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    max-width: 40%;
+    max-height: 70vh; /* Adjust this value to control form height */
+    margin-bottom: 20px;
+    overflow-y: auto; /* Enable vertical scrolling */
+    padding-right: 10px; /* Add padding to avoid content hiding behind the scroll bar */
+}
+
+
+.right-side-container {
+    display: flex;
+    justify-content: center; /* Centers the image horizontally within the right side */
+    align-items: center; /* Centers the image vertically within the right side */
+    flex: 1; /* Takes up half of the container */
+}
+
+.image-container {
+    max-width: 100%;
+    height: auto;
+}
+
+input[type="number"],
+input[type="text"] {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+button {
+    background-color: #46B751;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    width: auto;
+    align-self: center;
+}
+
+button:hover {
+    background-color: #4D8C69;
+}
