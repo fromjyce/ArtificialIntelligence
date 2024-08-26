@@ -1,7 +1,10 @@
-from flask import Flask, request, jsonify
+from flask import Flask, request, jsonify, send_file
 from flask_cors import CORS
 import ctypes
 from ctypes import c_int, POINTER, Structure
+import networkx as nx
+import matplotlib.pyplot as plt
+import os
 
 class CPath(Structure):
     _fields_ = [("nodes", c_int * 100),
@@ -26,6 +29,34 @@ def convert_vertex(vertex):
 def convert_instance(vertex):
     return ord(vertex) if isinstance(vertex, str) else vertex
 
+def generate_image(graph, highlight_nodes, filename, algorithm_name):
+    G = nx.Graph()
+    for node, edges in graph.items():
+        for edge in edges:
+            G.add_edge(node, edge[0])
+
+    pos = nx.spring_layout(G)
+
+    highlight_edges = []
+    gray_edges = []
+
+    for edge in G.edges():
+        if edge[0] in highlight_nodes and edge[1] in highlight_nodes:
+            highlight_edges.append(edge)
+        else:
+            gray_edges.append(edge)
+
+    nx.draw_networkx_nodes(G, pos, nodelist=G.nodes(), node_color='lightgray', node_size=700)
+    nx.draw_networkx_edges(G, pos, edgelist=gray_edges, edge_color='lightgray')
+
+    nx.draw_networkx_nodes(G, pos, nodelist=highlight_nodes, node_color='lightblue', node_size=700)
+    nx.draw_networkx_edges(G, pos, edgelist=highlight_edges, edge_color='blue')
+
+    nx.draw_networkx_labels(G, pos, font_size=15, font_weight='bold')
+    plt.title("Graph Visualization with Highlighted Nodes and Edges")
+    plt.savefig(filename)
+    plt.close()
+
 @app.route('/api/graph', methods=['POST'])
 def process_graph():
     path_nodes = (c_int * 100)()
@@ -41,13 +72,7 @@ def process_graph():
     algorithm_name = data.get('algorithm_name', 'Unknown Algorithm')
     graph = {}
 
-    print(f"Received Algorithm Name: {algorithm_name}")
-    print(f"Received Initial Vertex: {initial_vertex}")
-    print(f"Received Terminal Vertex: {terminal_vertex}")
-
-    # Determine if the vertices are characters or integers
     vertices_are_chars = isinstance(initial_vertex, str)
-
     initial_vertex = convert_instance(initial_vertex)
     terminal_vertex = convert_instance(terminal_vertex)
 
@@ -67,7 +92,6 @@ def process_graph():
             graph[start_vertex].append((end_vertex, edge_weight))
             graph[end_vertex].append((start_vertex, edge_weight))
 
-        print(f"Processed Graph: {graph}")
         graph_str = graph_to_string(graph)
         lib = ctypes.CDLL(f'./shared_object_files/{algorithm_name}.so')
 
@@ -76,20 +100,18 @@ def process_graph():
         found = getattr(lib, f'{algorithm_name}_ctypes')(graph_str.encode('utf-8'), initial_vertex, terminal_vertex, path_nodes, ctypes.byref(path_length))
 
         if found:
-            print("Target node found.")
+            highlight_nodes = [path_nodes[i] for i in range(path_length.value)]
             if vertices_are_chars:
-                print("Path taken:", " -> ".join(chr(path_nodes[i]) for i in range(path_length.value)))
-            else:
-                print("Path taken:", " -> ".join(str(path_nodes[i]) for i in range(path_length.value)))
-        else:
-            print("Target node not found.")
+                highlight_nodes = [chr(node) for node in highlight_nodes]
+            filename = 'static/{algorithm_name}_graph_image.png'
+            generate_image(graph, highlight_nodes, filename, algorithm_name)
 
-        return jsonify({
-            'graph': graph,
-            'initial_vertex': chr(initial_vertex) if vertices_are_chars else initial_vertex,
-            'terminal_vertex': chr(terminal_vertex) if vertices_are_chars else terminal_vertex
-        })
-    return jsonify({'error': 'Invalid input'})
+            return send_file(filename, mimetype='image/png')
+        else:
+            return jsonify({'error': 'Target node not found.'}), 404
+    return jsonify({'error': 'Invalid input'}), 400
 
 if __name__ == '__main__':
+    if not os.path.exists('static'):
+        os.makedirs('static')
     app.run(debug=True)
