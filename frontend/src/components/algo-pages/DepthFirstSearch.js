@@ -12,7 +12,7 @@ const DepthFirstSearch = () => {
     const [errorMessage, setErrorMessage] = useState('');
     const [algorithmName] = useState('depth_first_search');
     const leftLink = "/british-museum-search";
-    const rightLink = "/";
+    const rightLink = "/breadth-first-search";
 
     const handleEdgesChange = (e) => {
         const edges = e.target.value;
