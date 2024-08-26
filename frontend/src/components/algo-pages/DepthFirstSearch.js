@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
-import '../../styles/algo-pages/BritishMuseumSearch.css';
+import '../../styles/algo-pages/DepthFirstSearch.css';
+import DoubleFooter from './DoubleFooter';
 
-const BritishMuseumSearch = () => {
+const DepthFirstSearch = () => {
     const [numVertices, setNumVertices] = useState('');
     const [numEdges, setNumEdges] = useState('');
     const [edgesInput, setEdgesInput] = useState([]);
@@ -9,7 +10,9 @@ const BritishMuseumSearch = () => {
     const [terminalVertex, setTerminalVertex] = useState('');
     const [imageSrc, setImageSrc] = useState('');
     const [errorMessage, setErrorMessage] = useState('');
-    const [algorithmName] = useState('British Museum Search');
+    const [algorithmName] = useState('british_museum_search');
+    const leftLink = "/blind-algorithm-list";
+    const rightLink = "/";
 
     const handleEdgesChange = (e) => {
         const edges = e.target.value;
@@ -67,13 +70,13 @@ const BritishMuseumSearch = () => {
             }
 
             const data = await response.json();
-            if (data.image_url) {
-                setImageSrc(data.image_url);
-                setErrorMessage('');
-            } else {
-                setImageSrc('');
-                setErrorMessage('Failed to retrieve image');
-            }
+        if (data.image_base64) {
+            setImageSrc(`data:image/png;base64,${data.image_base64}`);
+            setErrorMessage('');
+        } else {
+            setImageSrc('');
+            setErrorMessage('Failed to retrieve image');
+        }
         } catch (error) {
             setImageSrc('');
             setErrorMessage('An error occurred while fetching the image.');
@@ -129,29 +132,33 @@ const BritishMuseumSearch = () => {
                         <div style={{ display: 'flex', gap: '10px', marginBottom: '10px' }}>
                             <input
                                 type="text"
-                                placeholder="Initial Vertex"
+                                name="initial_vertex"
+                                placeholder="Initial vertex"
                                 value={initialVertex}
                                 onChange={(e) => setInitialVertex(e.target.value)}
                             />
                             <input
                                 type="text"
-                                placeholder="Terminal Vertex"
+                                name="terminal_vertex"
+                                placeholder="Terminal vertex"
                                 value={terminalVertex}
                                 onChange={(e) => setTerminalVertex(e.target.value)}
                             />
                         </div>
                     )}
                     <button type="submit">Submit</button>
+                    {errorMessage && <p className="error-message">{errorMessage}</p>}
                 </form>
             </div>
             <div className="right-side-container">
-                <div className="image-container">
-                    {imageSrc && <img src={imageSrc} alt="Graph Representation" />}
-                    {errorMessage && <p>{errorMessage}</p>}
+            <div className="image-container">
+                {imageSrc && <img src={imageSrc} alt="Graph visualization" />}
+                {errorMessage && <p className="error-message">{errorMessage}</p>}
                 </div>
             </div>
+            <DoubleFooter leftLink={leftLink} rightLink={rightLink} />
         </div>
     );
 };
 
-export default BritishMuseumSearch;
+export default DepthFirstSearch;
