@@ -1,0 +1,32 @@
+.footer {
+    background-color: white;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1);
+    box-sizing: border-box; /* Ensures padding is included in width */
+  }
+  
+  .footer-button {
+    background-color: #007BFF;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    font-size: 16px;
+    border-radius: 5px;
+    flex: 1; 
+    max-width: 150px;
+    margin: 0 10px;
+    text-align: center;
+  }
+  
+  .footer-button:hover {
+    background-color: #0056b3;
+  }
+  
