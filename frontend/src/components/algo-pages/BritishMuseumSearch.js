@@ -66,14 +66,10 @@ const BritishMuseumSearch = () => {
                 throw new Error('Network response was not ok');
             }
 
-            const data = await response.json();
-            if (data.image_url) {
-                setImageSrc(data.image_url);
-                setErrorMessage('');
-            } else {
-                setImageSrc('');
-                setErrorMessage('Failed to retrieve image');
-            }
+            const imageBlob = await response.blob();
+            const imageUrl = URL.createObjectURL(imageBlob);
+            setImageSrc(imageUrl);
+            setErrorMessage('');
         } catch (error) {
             setImageSrc('');
             setErrorMessage('An error occurred while fetching the image.');
@@ -129,25 +125,28 @@ const BritishMuseumSearch = () => {
                         <div style={{ display: 'flex', gap: '10px', marginBottom: '10px' }}>
                             <input
                                 type="text"
-                                placeholder="Initial Vertex"
+                                name="initial_vertex"
+                                placeholder="Initial vertex"
                                 value={initialVertex}
                                 onChange={(e) => setInitialVertex(e.target.value)}
                             />
                             <input
                                 type="text"
-                                placeholder="Terminal Vertex"
+                                name="terminal_vertex"
+                                placeholder="Terminal vertex"
                                 value={terminalVertex}
                                 onChange={(e) => setTerminalVertex(e.target.value)}
                             />
                         </div>
                     )}
                     <button type="submit">Submit</button>
+                    {errorMessage && <p className="error-message">{errorMessage}</p>}
                 </form>
             </div>
             <div className="right-side-container">
-                <div className="image-container">
-                    {imageSrc && <img src={imageSrc} alt="Graph Representation" />}
-                    {errorMessage && <p>{errorMessage}</p>}
+            <div className="image-container">
+                {imageSrc && <img src={imageSrc} alt="Graph visualization" />}
+                {errorMessage && <p className="error-message">{errorMessage}</p>}
                 </div>
             </div>
         </div>
