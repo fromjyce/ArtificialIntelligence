@@ -71,8 +71,6 @@ def process_graph():
     path_length = c_int()
     data = request.get_json()
 
-    algo_list = ['britishmuseumsearch', 'depthfirstsearch', 'breadthfirstsearch']
-
     num_vertices = data.get('vertices', '')
     num_edges = data.get('edges', '')
     initial_vertex = convert_vertex(data.get('initial_vertex', ''))
