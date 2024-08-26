@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import '../../styles/algo-pages/BritishMuseumSearch.css';
+import DoubleFooter from './DoubleFooter';
 
 const BritishMuseumSearch = () => {
     const [numVertices, setNumVertices] = useState('');
@@ -10,6 +11,8 @@ const BritishMuseumSearch = () => {
     const [imageSrc, setImageSrc] = useState('');
     const [errorMessage, setErrorMessage] = useState('');
     const [algorithmName] = useState('british_museum_search');
+    const leftLink = "/blind-algorithm-list";
+    const rightLink = "/";
 
     const handleEdgesChange = (e) => {
         const edges = e.target.value;
@@ -153,6 +156,7 @@ const BritishMuseumSearch = () => {
                 {errorMessage && <p className="error-message">{errorMessage}</p>}
                 </div>
             </div>
+            <DoubleFooter leftLink={leftLink} rightLink={rightLink} />
         </div>
     );
 };
