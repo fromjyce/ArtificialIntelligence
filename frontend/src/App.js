@@ -5,6 +5,7 @@ import InformedAlgoList from './components/InformedAlgoList';
 import OptimalAlgoList from './components/OptimalAlgoList';
 import BritishMuseumSearch from "./components/algo-pages/BritishMuseumSearch";
 import DepthFirstSearch from "./components/algo-pages/DepthFirstSearch";
+import BreadthFirstSearch from "./components/algo-pages/BreadthFirstSearch";
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
                 <Route path="/optimal-algorithm-list" element={<OptimalAlgoList/>} />
                 <Route path="/british-museum-search" element={<BritishMuseumSearch/>} />
                 <Route path="/depth-first-search" element={<DepthFirstSearch />} />
+                <Route path="/breadth-first-search" element={<BreadthFirstSearch />} />
             </Routes>
         </Router>
   );
