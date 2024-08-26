@@ -12,7 +12,7 @@ const BritishMuseumSearch = () => {
     const [errorMessage, setErrorMessage] = useState('');
     const [algorithmName] = useState('british_museum_search');
     const leftLink = "/blind-algorithm-list";
-    const rightLink = "/";
+    const rightLink = "/depth-first-search";
 
     const handleEdgesChange = (e) => {
         const edges = e.target.value;
