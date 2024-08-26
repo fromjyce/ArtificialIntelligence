@@ -10,8 +10,8 @@ const DepthFirstSearch = () => {
     const [terminalVertex, setTerminalVertex] = useState('');
     const [imageSrc, setImageSrc] = useState('');
     const [errorMessage, setErrorMessage] = useState('');
-    const [algorithmName] = useState('british_museum_search');
-    const leftLink = "/blind-algorithm-list";
+    const [algorithmName] = useState('depth_first_search');
+    const leftLink = "/british-museum-search";
     const rightLink = "/";
 
     const handleEdgesChange = (e) => {
@@ -86,7 +86,7 @@ const DepthFirstSearch = () => {
     return (
         <div className="british-museum-search-container">
             <div className="left-side-container">
-                <h1 className='algorithm-title'>British Museum Search</h1>
+                <h1 className='algorithm-title'>Depth First Search</h1>
                 <form onSubmit={handleSubmit} className="form-container">
                     <div>
                         <input
