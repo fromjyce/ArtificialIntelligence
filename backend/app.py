@@ -63,6 +63,9 @@ def generate_image(graph, highlight_nodes):
 
     img_base64 = base64.b64encode(img.getvalue()).decode('utf-8')
 
+    plt.clf()
+    plt.close()
+
     return img_base64
 
 @app.route('/api/graph', methods=['POST'])
