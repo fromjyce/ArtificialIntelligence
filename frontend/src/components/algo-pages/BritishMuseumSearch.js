@@ -9,7 +9,7 @@ const BritishMuseumSearch = () => {
     const [terminalVertex, setTerminalVertex] = useState('');
     const [imageSrc, setImageSrc] = useState('');
     const [errorMessage, setErrorMessage] = useState('');
-    const [algorithmName] = useState('British Museum Search');
+    const [algorithmName] = useState('british_museum_search');
 
     const handleEdgesChange = (e) => {
         const edges = e.target.value;
