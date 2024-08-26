@@ -66,10 +66,14 @@ const BritishMuseumSearch = () => {
                 throw new Error('Network response was not ok');
             }
 
-            const imageBlob = await response.blob();
-            const imageUrl = URL.createObjectURL(imageBlob);
-            setImageSrc(imageUrl);
+            const data = await response.json();
+        if (data.image_base64) {
+            setImageSrc(`data:image/png;base64,${data.image_base64}`);
             setErrorMessage('');
+        } else {
+            setImageSrc('');
+            setErrorMessage('Failed to retrieve image');
+        }
         } catch (error) {
             setImageSrc('');
             setErrorMessage('An error occurred while fetching the image.');

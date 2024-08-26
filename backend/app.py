@@ -4,6 +4,10 @@ import ctypes
 from ctypes import c_int, POINTER, Structure
 import networkx as nx
 import matplotlib.pyplot as plt
+import matplotlib
+matplotlib.use("Agg")
+import io
+import base64
 import os
 
 class CPath(Structure):
@@ -29,7 +33,7 @@ def convert_vertex(vertex):
 def convert_instance(vertex):
     return ord(vertex) if isinstance(vertex, str) else vertex
 
-def generate_image(graph, highlight_nodes, filename, algorithm_name):
+def generate_image(graph, highlight_nodes):
     G = nx.Graph()
     for node, edges in graph.items():
         for edge in edges:
@@ -53,9 +57,13 @@ def generate_image(graph, highlight_nodes, filename, algorithm_name):
     nx.draw_networkx_edges(G, pos, edgelist=highlight_edges, edge_color='blue')
 
     nx.draw_networkx_labels(G, pos, font_size=15, font_weight='bold')
-    plt.title("Graph Visualization with Highlighted Nodes and Edges")
-    plt.savefig(filename)
-    plt.close()
+    img = io.BytesIO()
+    plt.savefig(img, format='png')
+    img.seek(0)
+
+    img_base64 = base64.b64encode(img.getvalue()).decode('utf-8')
+
+    return img_base64
 
 @app.route('/api/graph', methods=['POST'])
 def process_graph():
@@ -103,15 +111,12 @@ def process_graph():
             highlight_nodes = [path_nodes[i] for i in range(path_length.value)]
             if vertices_are_chars:
                 highlight_nodes = [chr(node) for node in highlight_nodes]
-            filename = 'static/{algorithm_name}_graph_image.png'
-            generate_image(graph, highlight_nodes, filename, algorithm_name)
+            image = generate_image(graph, highlight_nodes)
 
-            return send_file(filename, mimetype='image/png')
+            return jsonify({'image_base64': image})
         else:
             return jsonify({'error': 'Target node not found.'}), 404
     return jsonify({'error': 'Invalid input'}), 400
 
 if __name__ == '__main__':
-    if not os.path.exists('static'):
-        os.makedirs('static')
     app.run(debug=True)
