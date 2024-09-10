@@ -6,6 +6,7 @@ import OptimalAlgoList from './components/OptimalAlgoList';
 import BritishMuseumSearch from "./components/algo-pages/BritishMuseumSearch";
 import DepthFirstSearch from "./components/algo-pages/DepthFirstSearch";
 import BreadthFirstSearch from "./components/algo-pages/BreadthFirstSearch";
+import HillClimbingSearch from "./components/algo-pages/HillClimbingMethod";
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
                 <Route path="/british-museum-search" element={<BritishMuseumSearch/>} />
                 <Route path="/depth-first-search" element={<DepthFirstSearch />} />
                 <Route path="/breadth-first-search" element={<BreadthFirstSearch />} />
+                <Route path="/hill-climbing-method" element={<HillClimbingSearch />} />
             </Routes>
         </Router>
   );
