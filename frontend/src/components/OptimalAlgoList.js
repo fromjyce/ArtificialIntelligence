@@ -25,14 +25,14 @@ const OptimalAlgoList = () => {
                         link="/branch-bound-cost-heuristics-method" 
                     />
                     <AlgorithmDetail 
-                        title="Branch & Bound + Dead Horse + Cost + Heuristics" 
-                        description="his is a more advanced variant of Branch & Bound that includes cost estimates, heuristics, and methods to handle redundant paths." 
-                        link="/branch-bound-dead-horse-cost-heauristics-method" 
+                        title="A* Search" 
+                        description="his is a more advanced variant of Branch & Bound that includes cost estimates, heuristics, and methods to handle redundant paths (Dead Horse)." 
+                        link="/a-star-search-method" 
                     />
                     <AlgorithmDetail 
-                        title="A* Search" 
+                        title="AO* Search" 
                         description="It is an algorithm that finds the shortest path between two nodes in a graph by combining the actual cost from the start node and an estimated cost to the goal." 
-                        link="a-star-search-method" 
+                        link="/a-o-star-search-method" 
                     />
                     </div>
             <button className="back-button" onClick={() => navigate('/')}>Back</button>
