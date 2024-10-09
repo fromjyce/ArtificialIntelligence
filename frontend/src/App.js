@@ -7,6 +7,7 @@ import BritishMuseumSearch from "./components/algo-pages/BritishMuseumSearch";
 import DepthFirstSearch from "./components/algo-pages/DepthFirstSearch";
 import BreadthFirstSearch from "./components/algo-pages/BreadthFirstSearch";
 import HillClimbingSearch from "./components/algo-pages/HillClimbingMethod";
+import BeamSearch from "./components/algo-pages/BeamSearch";
 
 function App() {
   return (
@@ -20,6 +21,7 @@ function App() {
                 <Route path="/depth-first-search" element={<DepthFirstSearch />} />
                 <Route path="/breadth-first-search" element={<BreadthFirstSearch />} />
                 <Route path="/hill-climbing-method" element={<HillClimbingSearch />} />
+                <Route path="/beam-search-method" element={<BeamSearch />} />
             </Routes>
         </Router>
   );
