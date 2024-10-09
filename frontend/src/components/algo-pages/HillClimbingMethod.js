@@ -6,6 +6,7 @@ const HillClimbingSearch = () => {
     const [numVertices, setNumVertices] = useState('');
     const [numEdges, setNumEdges] = useState('');
     const [edgesInput, setEdgesInput] = useState([]);
+    const [heuristicsInput, setHeuristicsInput] = useState([]);
     const [initialVertex, setInitialVertex] = useState('');
     const [terminalVertex, setTerminalVertex] = useState('');
     const [imageSrc, setImageSrc] = useState('');
@@ -13,6 +14,18 @@ const HillClimbingSearch = () => {
     const [algorithmName] = useState('hill_climbing_search');
     const leftLink = "/informed-algorithm-list";
     const rightLink = "/beam-search-method";
+
+    const handleVerticesChange = (e) => {
+        const vertices = e.target.value;
+        setNumVertices(vertices);
+
+        const heuristicsArray = Array.from({ length: Number(vertices) }, (_, i) => ({
+            vertexLabel: '',
+            heuristicValue: '',
+        }));
+
+        setHeuristicsInput(heuristicsArray);
+    };
 
     const handleEdgesChange = (e) => {
         const edges = e.target.value;
@@ -34,10 +47,24 @@ const HillClimbingSearch = () => {
         setEdgesInput(updatedEdges);
     };
 
+    const handleHeuristicInputChange = (index, field, value) => {
+        const updatedHeuristics = heuristicsInput.map((heuristic, i) =>
+            i === index ? { ...heuristic, [field]: value } : heuristic
+        );
+        setHeuristicsInput(updatedHeuristics);
+    };
+
     const handleSubmit = async (e) => {
         e.preventDefault();
 
-        if (!numVertices || !numEdges || edgesInput.some(edge => !edge.startVertex || !edge.endVertex) || !initialVertex || !terminalVertex) {
+        if (
+            !numVertices ||
+            !numEdges ||
+            edgesInput.some(edge => !edge.startVertex || !edge.endVertex) ||
+            !initialVertex ||
+            !terminalVertex ||
+            heuristicsInput.some(heuristic => !heuristic.vertexLabel || heuristic.heuristicValue === '')
+        ) {
             setErrorMessage('Please fill in all the input fields before submitting.');
             return;
         }
@@ -56,6 +83,14 @@ const HillClimbingSearch = () => {
             formDataObj[`edge_weight_${i}`] = edge.edgeWeight;
         });
 
+        const heuristicsObj = {};
+        heuristicsInput.forEach(heuristic => {
+            if (heuristic.vertexLabel && heuristic.heuristicValue !== '') {
+                heuristicsObj[heuristic.vertexLabel] = Number(heuristic.heuristicValue);
+            }
+        });
+        formDataObj['heuristics'] = heuristicsObj;
+
         try {
             const response = await fetch('http://127.0.0.1:5000/api/graph', {
                 method: 'POST',
@@ -70,13 +105,13 @@ const HillClimbingSearch = () => {
             }
 
             const data = await response.json();
-        if (data.image_base64) {
-            setImageSrc(`data:image/png;base64,${data.image_base64}`);
-            setErrorMessage('');
-        } else {
-            setImageSrc('');
-            setErrorMessage('Failed to retrieve image');
-        }
+            if (data.image_base64) {
+                setImageSrc(`data:image/png;base64,${data.image_base64}`);
+                setErrorMessage('');
+            } else {
+                setImageSrc('');
+                setErrorMessage('Failed to retrieve image');
+            }
         } catch (error) {
             setImageSrc('');
             setErrorMessage('An error occurred while fetching the image.');
@@ -94,7 +129,7 @@ const HillClimbingSearch = () => {
                             name="vertices"
                             placeholder="Number of vertices"
                             value={numVertices}
-                            onChange={(e) => setNumVertices(e.target.value)}
+                            onChange={handleVerticesChange}
                         />
                     </div>
                     <div>
@@ -146,14 +181,30 @@ const HillClimbingSearch = () => {
                             />
                         </div>
                     )}
+                    {heuristicsInput.map((heuristic, index) => (
+                        <div key={index} style={{ display: 'flex', gap: '10px', marginBottom: '10px' }}>
+                            <input
+                                type="text"
+                                placeholder={`Vertex Label ${index + 1}`}
+                                value={heuristic.vertexLabel}
+                                onChange={(e) => handleHeuristicInputChange(index, 'vertexLabel', e.target.value)}
+                            />
+                            <input
+                                type="number"
+                                placeholder={`Heuristic Value ${index + 1}`}
+                                value={heuristic.heuristicValue}
+                                onChange={(e) => handleHeuristicInputChange(index, 'heuristicValue', e.target.value)}
+                            />
+                        </div>
+                    ))}
                     <button type="submit">Submit</button>
                     {errorMessage && <p className="error-message">{errorMessage}</p>}
                 </form>
             </div>
             <div className="right-side-container">
-            <div className="image-container">
-                {imageSrc && <img src={imageSrc} alt="Graph visualization" />}
-                {errorMessage && <p className="error-message">{errorMessage}</p>}
+                <div className="image-container">
+                    {imageSrc && <img src={imageSrc} alt="Graph visualization" />}
+                    {errorMessage && <p className="error-message">{errorMessage}</p>}
                 </div>
             </div>
             <DoubleFooter leftLink={leftLink} rightLink={rightLink} />
