@@ -68,6 +68,23 @@ def generate_image(graph, highlight_nodes):
 
     return img_base64
 
+def beam_search(graph, start, goal, heuristics, beam_width):
+    beam = [(start, [start])]
+    while beam:
+        new_beam = []
+        
+        for node, path in beam:
+            if node == goal:
+                return path
+            neighbors = sorted(graph.get(node, []), key=lambda x: heuristics.get(x[0], float('inf')))
+            for neighbor, _ in neighbors:
+                if neighbor not in path:
+                    new_beam.append((neighbor, path + [neighbor]))
+        new_beam = sorted(new_beam, key=lambda x: heuristics.get(x[0], float('inf')))
+        beam = new_beam[:beam_width]
+    return None
+
+
 def hill_climbing_search(graph, initial, terminal, heuristics):
     current_node = initial
     path = [current_node]
@@ -127,6 +144,17 @@ def process_graph():
             graph[end_vertex].append((start_vertex, edge_weight))
 
         if algorithm_name == 'hill_climbing_search':
+            path = hill_climbing_search(graph, initial_vertex, terminal_vertex, heuristics)
+            print(path)
+            
+            if path:
+                if vertices_are_chars:
+                    path = [chr(node) for node in path]
+                image = generate_image(graph, path)
+                return jsonify({'image_base64': image})
+            else:
+                return jsonify({'error': 'Target node not found or no path available.'}), 404
+        elif algorithm_name == 'beam_search_method':
             path = hill_climbing_search(graph, initial_vertex, terminal_vertex, heuristics)
             print(path)
             
