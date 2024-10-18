@@ -35,3 +35,10 @@ def AlphaBeta(depth, nodeIndex, isMaximizingPlayer, values, maxDepth, alpha, bet
                 print(f"Pruning at depth {depth} with Alpha: {alpha} and Beta: {beta}")
                 break
         return best
+
+maxDepth = 3
+values = [-1, 4, 2, 6, -3, -5, 0, 7]
+
+alpha, beta = -math.inf, math.inf
+
+optimalValue = AlphaBeta(0, 0, True, values, maxDepth, alpha, beta)
