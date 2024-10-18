@@ -9,6 +9,7 @@ import BreadthFirstSearch from "./components/algo-pages/BreadthFirstSearch";
 import HillClimbingSearch from "./components/algo-pages/HillClimbingMethod";
 import BeamSearch from "./components/algo-pages/BeamSearch";
 import OracleSearch from "./components/algo-pages/OracleSearch";
+import BestFirstSearch from "./components/algo-pages/BestFirstSearch";
 
 function App() {
   return (
@@ -24,6 +25,7 @@ function App() {
                 <Route path="/hill-climbing-method" element={<HillClimbingSearch />} />
                 <Route path="/beam-search-method" element={<BeamSearch />} />
                 <Route path="/oracle-search-method" element={<OracleSearch />} />
+                <Route path="/best-first-search" element={<BestFirstSearch />} />
             </Routes>
         </Router>
   );
