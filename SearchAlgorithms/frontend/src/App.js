@@ -11,6 +11,7 @@ import BeamSearch from "./components/algo-pages/BeamSearch";
 import OracleSearch from "./components/algo-pages/OracleSearch";
 import BestFirstSearch from "./components/algo-pages/BestFirstSearch";
 import BranchAndBound from "./components/algo-pages/BranchAndBound";
+import BranchAndBoundEL from "./components/algo-pages/BranchAndBoundEL";
 
 function App() {
   return (
@@ -28,6 +29,7 @@ function App() {
                 <Route path="/oracle-search-method" element={<OracleSearch />} />
                 <Route path="/best-first-search" element={<BestFirstSearch />} />
                 <Route path="/branch-bound-method" element={<BranchAndBound />} />
+                <Route path="/branch-bound-dead-horse-method" element={<BranchAndBoundEL />} />
             </Routes>
         </Router>
   );
