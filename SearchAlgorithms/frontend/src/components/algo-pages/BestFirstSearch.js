@@ -14,7 +14,7 @@ const BestFirstSearch = () => {
     const [algorithmName] = useState('best_first_search');
     const [betaValue, setBetaValue] = useState('');
     const leftLink = "/oracle-search-method";
-    const rightLink = "/branch-bound-method";
+    const rightLink = "/optimal-algorithm-list";
 
     const handleVerticesChange = (e) => {
         const vertices = e.target.value;
