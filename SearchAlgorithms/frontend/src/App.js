@@ -10,6 +10,7 @@ import HillClimbingSearch from "./components/algo-pages/HillClimbingMethod";
 import BeamSearch from "./components/algo-pages/BeamSearch";
 import OracleSearch from "./components/algo-pages/OracleSearch";
 import BestFirstSearch from "./components/algo-pages/BestFirstSearch";
+import BranchAndBound from "./components/algo-pages/BranchAndBound";
 
 function App() {
   return (
@@ -26,6 +27,7 @@ function App() {
                 <Route path="/beam-search-method" element={<BeamSearch />} />
                 <Route path="/oracle-search-method" element={<OracleSearch />} />
                 <Route path="/best-first-search" element={<BestFirstSearch />} />
+                <Route path="/branch-bound-method" element={<BranchAndBound />} />
             </Routes>
         </Router>
   );
