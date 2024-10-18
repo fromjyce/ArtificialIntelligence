@@ -12,6 +12,7 @@ import OracleSearch from "./components/algo-pages/OracleSearch";
 import BestFirstSearch from "./components/algo-pages/BestFirstSearch";
 import BranchAndBound from "./components/algo-pages/BranchAndBound";
 import BranchAndBoundEL from "./components/algo-pages/BranchAndBoundEL";
+import BranchAndBoundHC from "./components/algo-pages/BranchAndBoundHC";
 
 function App() {
   return (
@@ -30,6 +31,7 @@ function App() {
                 <Route path="/best-first-search" element={<BestFirstSearch />} />
                 <Route path="/branch-bound-method" element={<BranchAndBound />} />
                 <Route path="/branch-bound-dead-horse-method" element={<BranchAndBoundEL />} />
+                <Route path="/branch-bound-cost-heuristics-method" element={<BranchAndBoundHC />} />
             </Routes>
         </Router>
   );
