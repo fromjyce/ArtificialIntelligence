@@ -14,6 +14,7 @@ import BranchAndBound from "./components/algo-pages/BranchAndBound";
 import BranchAndBoundEL from "./components/algo-pages/BranchAndBoundEL";
 import BranchAndBoundHC from "./components/algo-pages/BranchAndBoundHC";
 import AStarSearch from "./components/algo-pages/AStarSearch";
+import AOStarSearch from "./components/algo-pages/AOStarSearch";
 
 function App() {
   return (
@@ -34,6 +35,7 @@ function App() {
                 <Route path="/branch-bound-dead-horse-method" element={<BranchAndBoundEL />} />
                 <Route path="/branch-bound-cost-heuristics-method" element={<BranchAndBoundHC />} />
                 <Route path="/a-star-search-method" element={<AStarSearch />} />
+                <Route path="/a-o-star-search-method" element={<AOStarSearch />} />
             </Routes>
         </Router>
   );
