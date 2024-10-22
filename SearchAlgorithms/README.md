@@ -8,11 +8,11 @@ The algorithms span various search techniques, from uninformed searches like Dep
 
 ## Search Algorithms Implemented
 
-1. **A* Search (`AStarSearch.js`)**: 
+1. **A Star Search (`AStarSearch.js`)**: 
    - Combines the best features of Uniform-Cost Search and Greedy Best-First Search.
    - Uses a heuristic function to find the shortest path in a graph.
    
-2. **AO* Search (`AOStarSearch.js`)**: 
+2. **AO Star Search (`AOStarSearch.js`)**: 
    - Handles AND-OR graphs, often used in problem-solving where sub-problems need to be solved in conjunction.
 
 3. **Beam Search (`BeamSearch.js`)**: 
